@@ -207,7 +207,7 @@ describe('PX API - pxapi.js', () => {
         JSON.stringify(pxCtx.decodedOriginalToken).should.equal('{"a":"c","s":0,"u":"09ade30a-f08b-11e7-8c3f-9a214cf093ae","t":1830515445000,"v":"0290edec-f08b-11e7-8c3f-9a214cf093ae"}');
         done();
     })
-    it('token v3 - should set originalTokenError to decryption_failed on original token decryption fail', (done) => {
+    it('token v3 - should set originalTokenError to cookie_decryption_failed on original token decryption fail', (done) => {
         var pxCtx = {
             cookies:{
                 _px3:'aaaa'
@@ -216,10 +216,10 @@ describe('PX API - pxapi.js', () => {
         }
 
         originalTokenValidator.evalCookie(pxCtx, config);
-        pxCtx.originalTokenError.should.equal('decryption_failed');
+        pxCtx.originalTokenError.should.equal('cookie_decryption_failed');
         done();
     })
-    it('token v3 - should set originalTokenError to validation_failed on original token validation fail', (done) => {
+    it('token v3 - should set originalTokenError to cookie_validation_failed on original token validation fail', (done) => {
         var pxCtx = {
             cookies:{
                 _px3:'aaaa'
@@ -230,7 +230,7 @@ describe('PX API - pxapi.js', () => {
         originalTokenValidator.evalCookie(pxCtx, config);
         pxCtx.originalUuid.should.equal('09ade30a-f08b-11e7-8c3f-9a214cf093ae');
         pxCtx.vid.should.equal('0290edec-f08b-11e7-8c3f-9a214cf093ae');
-        pxCtx.originalTokenError.should.equal('validation_failed');
+        pxCtx.originalTokenError.should.equal('cookie_validation_failed');
         done();
     })
     it('token v1 - should add originalUuid, vid and decodedOriginalToken to pxCtx when original token decryption succeeds', (done) => {
@@ -247,7 +247,7 @@ describe('PX API - pxapi.js', () => {
         JSON.stringify(pxCtx.decodedOriginalToken).should.equal('{"h":"aa2341380b7c67ee0ed5c2f7d4facf03847d7dcb4540aab021654361d3dcade4","s":{"a":0,"b":0},"u":"09ade30a-f08b-11e7-8c3f-9a214cf093ae","t":1830515445000,"v":"0290edec-f08b-11e7-8c3f-9a214cf093ae"}');
         done();
     })
-    it('token v1 - should set originalTokenError to decryption_failed on original token decryption fail', (done) => {
+    it('token v1 - should set originalTokenError to cookie_decryption_failed on original token decryption fail', (done) => {
         var pxCtx = {
             cookies:{
                 _px:'aaaa'
@@ -256,14 +256,14 @@ describe('PX API - pxapi.js', () => {
         }
 
         originalTokenValidator.evalCookie(pxCtx, config);
-        pxCtx.originalTokenError.should.equal('decryption_failed');
+        pxCtx.originalTokenError.should.equal('cookie_decryption_failed');
         done();
     })
-    it('should fail with exception and set originalTokenError to decryption_failed', (done) => {
+    it('should fail with exception and set originalTokenError to cookie_decryption_failed', (done) => {
         var pxCtx = {};
 
         originalTokenValidator.evalCookie(pxCtx, config);
-        pxCtx.originalTokenError.should.equal('decryption_failed');
+        pxCtx.originalTokenError.should.equal('cookie_decryption_failed');
         done();
     })
 });
